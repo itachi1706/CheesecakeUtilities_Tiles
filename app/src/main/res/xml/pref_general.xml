@@ -4,6 +4,8 @@
         android:defaultValue="true"
         android:key="example_switch"
         android:summary="@string/pref_description_test"
-        android:title="@string/pref_title_test" />
+        android:title="@string/pref_title_test">
+        <extra android:name="class"
+            android:value=".NewClass"/></SwitchPreference>
 
 </PreferenceScreen>
