@@ -1,14 +1,18 @@
 package com.itachi1706.cheesecakeutilities_tiles;
 
 
+import android.Manifest;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -52,6 +56,9 @@ public class ConfigurationActivity extends AppCompatActivity {
      * activity is showing a two-pane settings UI.
      */
     public static class GeneralPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
+
+        private boolean ss, du;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -76,8 +83,45 @@ public class ConfigurationActivity extends AppCompatActivity {
 
                 ((SwitchPreference) p).setChecked((getActivity().getPackageManager()
                         .getComponentEnabledSetting(new ComponentName(getActivity(), s)) == 1));
-
             }
+
+            // Check permission grant state
+            ss = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_SECURE_SETTINGS) == PackageManager.PERMISSION_GRANTED;
+            du = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.DUMP) == PackageManager.PERMISSION_GRANTED;
+
+            Preference additionalInfo = findPreference("info_additionalpermissions");
+            additionalInfo.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    new AlertDialog.Builder(getActivity()).setTitle("Additional Permissions")
+                            .setMessage("Some tiles require additional permissions to be granted. \n\n" +
+                                    "Permission Grant State\nWRITE_SECURE_SETTINGS: " + ss + "\nDUMP: " + du +
+                                    "\n\nTo grant these permissions, connect your device to a computer with ADB installed and execute the following commands:\n\n" +
+                                    getResources().getString(R.string.permission_command) + "\n\nClick share to share the commands required")
+                            .setPositiveButton(android.R.string.ok, null)
+                            .setNeutralButton("Share", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // TODO: Share
+                                    Intent intent = new Intent(Intent.ACTION_SEND);
+                                    intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.permission_command));
+                                    intent.setType("text/plain");
+                                    startActivity(intent);
+                                }
+                            }).show();
+                    return false;
+                }
+            });
+
+            if (ss && du) getPreferenceScreen().removePreference(additionalInfo);
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            // Check permission grant state
+            ss = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_SECURE_SETTINGS) == PackageManager.PERMISSION_GRANTED;
+            du = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.DUMP) == PackageManager.PERMISSION_GRANTED;
         }
 
         @Override

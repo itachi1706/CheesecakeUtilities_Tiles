@@ -1,11 +1,26 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
+    <!--<SwitchPreference
         android:defaultValue="true"
         android:key="example_switch"
         android:summary="@string/pref_description_test"
         android:title="@string/pref_title_test">
         <extra android:name="class"
-            android:value=".NewClass"/></SwitchPreference>
+            android:value=".NewClass"/>
+    </SwitchPreference>-->
+
+    <Preference
+        android:key="info_additionalpermissions"
+        android:title="Grant Additional Permissions"
+        android:summary="Click to view how to enable additional permissions" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="tile_animatorduration"
+        android:title="@string/tiletitle_animatorduration">
+        <extra
+            android:name="class"
+            android:value=".Tiles.ToggleAnimatorDurationService" />
+    </SwitchPreference>
 
 </PreferenceScreen>

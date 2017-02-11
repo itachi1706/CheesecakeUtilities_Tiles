@@ -4,7 +4,7 @@
     <string name="pref_title_test">Test Setting</string>
     <string name="pref_description_test">Test Setting Description</string>
 
-    <string name="permission_required_toast">ADB permissions need to be granted</string>
+    <string name="permission_required_toast">ADB permissions need to be granted. Refer to app for more information</string>
 
     <!-- Animation Duration Selector -->
     <string name="dialog_animator_duration_title">Animator duration scale</string>
@@ -15,4 +15,10 @@
     <string name="animation_scale_2x">Animation scale 2x</string>
     <string name="animation_scale_5x">Animation scale 5x</string>
     <string name="animation_scale_10x">Animation scale 10x</string>
+    <string name="tiletitle_animatorduration">Animator Duration Scale</string>
+
+    <!-- Grant Security -->
+    <string name="grant_permission">Grant Permissions</string>
+    <string name="permission_command">adb shell pm grant com.itachi1706.cheesecakeutilities_tiles android.permission.WRITE_SECURE_SETTINGS\n\nadb shell pm grant com.itachi1706.cheesecakeutilities_tiles android.permission.DUMP</string>
+    <string name="btn_label_share">Share</string>
 </resources>
