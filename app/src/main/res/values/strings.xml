@@ -3,4 +3,16 @@
 
     <string name="pref_title_test">Test Setting</string>
     <string name="pref_description_test">Test Setting Description</string>
+
+    <string name="permission_required_toast">ADB permissions need to be granted</string>
+
+    <!-- Animation Duration Selector -->
+    <string name="dialog_animator_duration_title">Animator duration scale</string>
+    <string name="animation_off">Animation off</string>
+    <string name="animation_scale_0_5x">Animation scale .5x</string>
+    <string name="animation_scale_1x">Animation scale 1x</string>
+    <string name="animation_scale_1_5x">Animation scale 1.5x</string>
+    <string name="animation_scale_2x">Animation scale 2x</string>
+    <string name="animation_scale_5x">Animation scale 5x</string>
+    <string name="animation_scale_10x">Animation scale 10x</string>
 </resources>
