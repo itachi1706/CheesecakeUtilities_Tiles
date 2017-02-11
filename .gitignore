@@ -47,3 +47,4 @@ captures/
 fabric.properties
 
 *.iml
+app/google-services.json
