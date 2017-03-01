@@ -19,6 +19,7 @@
 
     <!-- Grant Security -->
     <string name="grant_permission">Grant Permissions</string>
-    <string name="permission_command">adb shell pm grant com.itachi1706.cheesecakeutilities_tiles android.permission.WRITE_SECURE_SETTINGS\n\nadb shell pm grant com.itachi1706.cheesecakeutilities_tiles android.permission.DUMP</string>
+    <string name="permission_ss_command">adb shell pm grant com.itachi1706.cheesecakeutilities_tiles android.permission.WRITE_SECURE_SETTINGS</string>
+    <string name="permission_d_command">adb shell pm grant com.itachi1706.cheesecakeutilities_tiles android.permission.DUMP</string>
     <string name="btn_label_share">Share</string>
 </resources>

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.support.v4.content.ContextCompat;
@@ -89,39 +90,71 @@ public class ConfigurationActivity extends AppCompatActivity {
             ss = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_SECURE_SETTINGS) == PackageManager.PERMISSION_GRANTED;
             du = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.DUMP) == PackageManager.PERMISSION_GRANTED;
 
-            Preference additionalInfo = findPreference("info_additionalpermissions");
-            additionalInfo.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            Log.i("PermissionCheck", "SECURE_SETTINGS: " + ss + " | DUMP: " + du);
+
+            findPreference("perm_securesettings").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    new AlertDialog.Builder(getActivity()).setTitle("Additional Permissions")
-                            .setMessage("Some tiles require additional permissions to be granted. \n\n" +
-                                    "Permission Grant State\nWRITE_SECURE_SETTINGS: " + ss + "\nDUMP: " + du +
-                                    "\n\nTo grant these permissions, connect your device to a computer with ADB installed and execute the following commands:\n\n" +
-                                    getResources().getString(R.string.permission_command) + "\n\nClick share to share the commands required")
+                    new AlertDialog.Builder(getActivity()).setTitle("Grant SECURE_SETTINGS Permission")
+                            .setMessage("To be able to use some of the tiles, " +
+                                    "please grant the android.permission.SECURE_SETTINGS permission\n\n" +
+                                    "To grant this permission, connect your device to a computer with ADB installed " +
+                                    "and execute the following command:\n\n" + getResources().getString(R.string.permission_ss_command) +
+                                    "\n\nClick share to share the command required")
                             .setPositiveButton(android.R.string.ok, null)
                             .setNeutralButton("Share", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    // TODO: Share
-                                    Intent intent = new Intent(Intent.ACTION_SEND);
-                                    intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.permission_command));
-                                    intent.setType("text/plain");
-                                    startActivity(intent);
+                                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                                    sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.permission_ss_command));
+                                    sendIntent.setType("text/plain");
+                                    startActivity(sendIntent);
                                 }
                             }).show();
                     return false;
                 }
             });
 
-            if (ss && du) getPreferenceScreen().removePreference(additionalInfo);
+            findPreference("perm_dump").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    new AlertDialog.Builder(getActivity()).setTitle("Grant DUMP Permission")
+                            .setMessage("To be able to use some of the tiles, " +
+                                    "please grant the android.permission.DUMP permission\n\n" +
+                                    "To grant this permission, connect your device to a computer with ADB installed " +
+                                    "and execute the following command:\n\n" + getResources().getString(R.string.permission_d_command) +
+                                    "\n\nClick share to share the command required")
+                            .setPositiveButton(android.R.string.ok, null)
+                            .setNeutralButton("Share", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                                    sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.permission_d_command));
+                                    sendIntent.setType("text/plain");
+                                    startActivity(sendIntent);
+                                }
+                            }).show();
+                    return false;
+                }
+            });
+
+            if (ss && du) getPreferenceScreen().removePreference(findPreference("cat_additionalperm")); // Hide category
+            else {
+                PreferenceCategory cat = (PreferenceCategory) findPreference("cat_additionalperm");
+                if (ss) {
+                    boolean res = cat.removePreference(findPreference("perm_securesettings"));
+                    Log.d("DEBUG", "Removed SS: " + res);
+                }
+                if (du) {
+                    boolean res = cat.removePreference(findPreference("perm_dump"));
+                    Log.d("DEBUG", "Removed D: " + res);
+                }
+            }
         }
 
         @Override
         public void onResume() {
             super.onResume();
-            // Check permission grant state
-            ss = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_SECURE_SETTINGS) == PackageManager.PERMISSION_GRANTED;
-            du = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.DUMP) == PackageManager.PERMISSION_GRANTED;
         }
 
         @Override

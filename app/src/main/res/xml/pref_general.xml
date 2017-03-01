@@ -9,18 +9,29 @@
             android:value=".NewClass"/>
     </SwitchPreference>-->
 
-    <Preference
-        android:key="info_additionalpermissions"
-        android:title="Grant Additional Permissions"
-        android:summary="Click to view how to enable additional permissions" />
+    <PreferenceCategory
+        android:key="cat_additionalperm"
+        android:title="Additional Permissions to grant">
+        <Preference
+            android:key="perm_securesettings"
+            android:summary="Click to view how to grant this permission to enable usage of some tiles"
+            android:title="Grant SECURE_SETTINGS permission" />
+        <Preference
+            android:key="perm_dump"
+            android:summary="Click to view how to grant this permission to enable usage of some tiles"
+            android:title="Grant DUMP permission" />
+    </PreferenceCategory>
 
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="tile_animatorduration"
-        android:title="@string/tiletitle_animatorduration">
-        <extra
-            android:name="class"
-            android:value=".Tiles.ToggleAnimatorDurationService" />
-    </SwitchPreference>
+    <PreferenceCategory android:title="Unsorted Tiles">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="tile_animatorduration"
+            android:summary="Requires SECURE_SETTINGS permission"
+            android:title="@string/tiletitle_animatorduration">
+            <extra
+                android:name="class"
+                android:value=".Tiles.ToggleAnimatorDurationService" />
+        </SwitchPreference>
+    </PreferenceCategory>
 
 </PreferenceScreen>
