@@ -2,5 +2,9 @@
 <resources>
     <string-array name="toggleList">
         <item>tile_animatorduration</item>
+        <item>tile_showtaps</item>
+        <item>tile_demomode</item>
+        <item>tile_keepscreenon</item>
+        <item>tile_usbdebugging</item>
     </string-array>
 </resources>

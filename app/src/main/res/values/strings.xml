@@ -17,6 +17,12 @@
     <string name="animation_scale_10x">Animation scale 10x</string>
     <string name="tiletitle_animatorduration">Animator Duration Scale</string>
 
+    <!-- Other Tiles -->
+    <string name="tiletitle_toggle_usb_debugging">USB Debugging Mode</string>
+    <string name="tiletitle_keep_screen_on">Keep Screen On For PC</string>
+    <string name="tiletitle_toggle_show_touches">Show taps</string>
+    <string name="tiletitle_toggle_demo_mode">Demo mode</string>
+
     <!-- Grant Security -->
     <string name="grant_permission">Grant Permissions</string>
     <string name="permission_ss_command">adb shell pm grant com.itachi1706.cheesecakeutilities_tiles android.permission.WRITE_SECURE_SETTINGS</string>

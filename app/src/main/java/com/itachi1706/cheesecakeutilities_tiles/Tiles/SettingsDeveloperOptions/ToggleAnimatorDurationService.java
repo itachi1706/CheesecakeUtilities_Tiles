@@ -1,4 +1,4 @@
-package com.itachi1706.cheesecakeutilities_tiles.Tiles;
+package com.itachi1706.cheesecakeutilities_tiles.Tiles.SettingsDeveloperOptions;
 
 /*
  * Copyright 2016 Google Inc.
