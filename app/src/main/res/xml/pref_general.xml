@@ -27,6 +27,7 @@
             android:defaultValue="false"
             android:key="tile_animatorduration"
             android:summary="Requires SECURE_SETTINGS permission"
+            android:icon="@drawable/ic_menu_animator_duration"
             android:title="@string/tiletitle_animatorduration">
             <extra
                 android:name="class"
@@ -36,6 +37,7 @@
             android:defaultValue="false"
             android:key="tile_showtaps"
             android:summary="Requires SECURE_SETTINGS permission"
+            android:icon="@drawable/ic_menu_toggle_show_taps"
             android:title="@string/tiletitle_toggle_show_touches">
             <extra
                 android:name="class"
@@ -45,6 +47,7 @@
             android:defaultValue="false"
             android:key="tile_demomode"
             android:summary="Requires SECURE_SETTINGS permission"
+            android:icon="@drawable/ic_menu_toggle_demo_mode"
             android:title="@string/tiletitle_toggle_demo_mode">
             <extra
                 android:name="class"
@@ -54,6 +57,7 @@
             android:defaultValue="false"
             android:key="tile_keepscreenon"
             android:summary="Requires SECURE_SETTINGS permission"
+            android:icon="@drawable/ic_menu_toggle_keep_screen_on"
             android:title="@string/tiletitle_keep_screen_on">
             <extra
                 android:name="class"
@@ -63,6 +67,7 @@
             android:defaultValue="false"
             android:key="tile_usbdebugging"
             android:summary="Requires SECURE_SETTINGS permission"
+            android:icon="@drawable/ic_menu_toggle_usb_debugging"
             android:title="@string/tiletitle_toggle_usb_debugging">
             <extra
                 android:name="class"
